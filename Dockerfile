@@ -135,7 +135,7 @@ RUN mkdir /opt/walle-web && mkdir -p /data/walle \
 #    && /bin/bash /opt/walle-web/admin.sh migration \
 #    && /bin/bash /opt/walle-web/admin.sh init \
     && apk --no-cache update \
-    && apk --no-cache add bash gcc musl-dev libffi-dev openssl-dev postgresql-dev mariadb-connector-c-dev python3-dev py-mysqldb \
+    && apk --no-cache add bash make gcc musl-dev libffi-dev openssl-dev postgresql-dev mariadb-connector-c-dev python3-dev py-mysqldb \
     && pip --no-cache-dir install virtualenv \
     && pip --no-cache-dir install -r /opt/walle-web/requirements/prod.txt \
     && apk del --no-cache .build-deps
