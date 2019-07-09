@@ -136,7 +136,7 @@ RUN mkdir /opt/walle-web && mkdir -p /data/walle \
 #    && /bin/bash /opt/walle-web/admin.sh init \
     && apk --no-cache update \
     && apk --no-cache add bash gcc musl-dev postgresql-dev python3-dev python-virtualenv python-pip \
-    && pip --no-cache-dir install virtualenv
+    && pip --no-cache-dir install virtualenv \
     && pip --no-cache-dir install -r /opt/walle-web/requirements/prod.txt \
     && apk del --no-cache .build-deps
 
