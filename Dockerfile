@@ -13,7 +13,7 @@ LABEL maintainer="auooru <auooru@outlook.com>"
 ENV S6_OVERLAY_VERSION 1.22.1.0
 
 ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-amd64.tar.gz /tmp/
-RUN tar xzf /tmp/s6-overlay-amd64.tar.gz -C /
+RUN tar -xzf /tmp/s6-overlay-amd64.tar.gz -C /
 
 # nginx
 ENV NGINX_VERSION 1.16.0
@@ -127,12 +127,15 @@ RUN set -x \
 # walle
 ENV WALLE_VERSION 2.0.1
 
-ADD https://github.com/meolu/walle-web/archive/v${WALLE_VERSION}.zip /tmp/
+ADD https://github.com/meolu/walle-web/archive/v${WALLE_VERSION}.tar.gz /tmp/
 RUN mkdir /opt/walle-web && mkdir -p /data/walle \
-    && tar xzf /tmp/v${WALLE_VERSION}.zip -C /opt/walle-web \
+    && tar -xzf /tmp/v${WALLE_VERSION}.tar.gz --strip-components=1 -C /opt/walle-web \
     && cp /opt/walle-web/gateway/nginx/default.conf /etc/nginx/conf.d/default.conf \
-    && pip install -r /opt/walle-web/requirements/prod.txt -i https://mirrors.aliyun.com/pypi/simple \
-    && /bin/bash /opt/walle-web/admin.sh migration
+    && apk --no-cache add postgresql-dev gcc python3-dev musl-dev \
+#    && pip install -r /opt/walle-web/requirements/prod.txt -i https://mirrors.aliyun.com/pypi/simple \
+#    && /bin/bash /opt/walle-web/admin.sh migration \
+    && /bin/bash /opt/walle-web/admin.sh init \
+    && apk del --no-cache .build-deps
 
 VOLUME ["/root/.ssh/", "/opt/walle-web/logs/", "/tmp/walle/codebase/"]
 
