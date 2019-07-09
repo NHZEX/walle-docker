@@ -131,7 +131,7 @@ ADD https://github.com/meolu/walle-web/archive/v${WALLE_VERSION}.tar.gz /tmp/
 RUN mkdir /opt/walle-web && mkdir -p /data/walle \
     && tar -xzf /tmp/v${WALLE_VERSION}.tar.gz --strip-components=1 -C /opt/walle-web \
     && cp /opt/walle-web/gateway/nginx/default.conf /etc/nginx/conf.d/default.conf \
-    && apk --no-cache add postgresql-dev gcc python3-dev musl-dev \
+    && apk --no-cache add bash postgresql-dev gcc python3-dev musl-dev \
 #    && pip install -r /opt/walle-web/requirements/prod.txt -i https://mirrors.aliyun.com/pypi/simple \
 #    && /bin/bash /opt/walle-web/admin.sh migration \
     && /bin/bash /opt/walle-web/admin.sh init \
