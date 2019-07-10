@@ -1,6 +1,6 @@
 # walle:latest
 
-FROM python:3.6-alpine3.10
+FROM python:2.7-alpine3.10
 
 # Standard set up docker-nginx
 # https://github.com/nginxinc/docker-nginx/blob/master/stable/alpine/Dockerfile
